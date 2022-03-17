@@ -15,7 +15,7 @@ class UserControllers {
         city,
         cpf,
         password,
-        vaccines,
+        // vaccines,
       } = req.body;
 
       const user = await User.create({
@@ -29,7 +29,7 @@ class UserControllers {
         city,
         cpf,
         password,
-        vaccines,
+        // vaccines,
       });
 
       res.status(201).json(user);
@@ -72,7 +72,7 @@ class UserControllers {
       const userUpdated = await User.findByIdAndUpdate(id, {
         avatarUrl,
         password,
-        vaccines,
+        // vaccines,
         new: true,
       });
 
@@ -105,11 +105,11 @@ class UserControllers {
       }).select("+password");
 
       if (!user) {
-        throw new Error("usuario nao encontrado");
+        throw new Error("Usuário não encontrado");
       }
 
       if (user.password !== password) {
-        res.status(400).json({ error: "senha invalida" });
+        throw new Error("Senha inválida.");
       }
 
       const token = jwt.sign(
