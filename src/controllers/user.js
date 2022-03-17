@@ -1,4 +1,5 @@
 import User from "../models/user.js";
+import jwt from "jsonwebtoken";
 
 class UserControllers {
   static async createUser(req, res) {
@@ -92,6 +93,37 @@ class UserControllers {
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Algo deu errado." });
+    }
+  }
+
+  static async login(req, res) {
+    try {
+      const { email, password } = req.body;
+
+      const user = await User.findOne({
+        email,
+      }).select("+password");
+
+      if (!user) {
+        throw new Error("usuario nao encontrado");
+      }
+
+      if (user.password !== password) {
+        res.status(400).json({ error: "senha invalida" });
+      }
+
+      const token = jwt.sign(
+        {
+          id: user.id,
+        },
+        process.env.SECRET,
+        { expiresIn: "1d" }
+      );
+
+      res.json({ token, user });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "aconteceu algo de errado." });
     }
   }
 }
