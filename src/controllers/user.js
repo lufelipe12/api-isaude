@@ -48,6 +48,52 @@ class UserControllers {
       res.status(500).json({ error: "Algo deu errado." });
     }
   }
+
+  static async getUserById(req, res) {
+    try {
+      const { id } = req.params;
+
+      const user = await User.findById(id);
+
+      res.json({ user });
+    } catch (error) {
+      console.log(error);
+
+      res.status(500).json({ error: "Algo deu errado." });
+    }
+  }
+
+  static async updateUser(req, res) {
+    try {
+      const { id } = req.params;
+      const { avatarUrl, password, vaccines } = req.body;
+
+      const userUpdated = await User.findByIdAndUpdate(id, {
+        avatarUrl,
+        password,
+        vaccines,
+        new: true,
+      });
+
+      res.status(200).json(userUpdated);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Algo deu errado." });
+    }
+  }
+
+  static async deleteUser(req, res) {
+    try {
+      const { id } = req.params;
+
+      await User.findByIdAndRemove(id);
+
+      res.status(204).json({});
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Algo deu errado." });
+    }
+  }
 }
 
 export default UserControllers;
