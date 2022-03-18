@@ -69,7 +69,8 @@ URL : https://api-isaude.herokuapp.com
 
 		{
 
-			"token": 	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzRkMGM5ZmVlYWY2MDE4ZTg0ZWNkNyIsImlhdCI6MTY0NzYzMTEzMSwiZXhwIjoxNjQ3NzE3NTMxfQ.gnDMQJ9OJT6daGPDp2S3fydEVyMKSiKy4jXzmaIaDZ4",
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzRkMGM5ZmVlYWY2MDE4ZTg0ZWNkNyIsImlhdCI6MTY0Nz
+			YzMTEzMSwiZXhwIjoxNjQ3NzE3NTMxfQ.gnDMQJ9OJT6daGPDp2S3fydEVyMKSiKy4jXzmaIaDZ4",
 			"user": {
 				"_id": "6234d0c9feeaf6018e84ecd7",
 				"name": "luiz",
