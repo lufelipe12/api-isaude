@@ -208,6 +208,12 @@ class UserControllers {
         return res.status(404).json({ error: "Usuário não encontrado." });
       }
 
+      const vaccine = await Vaccine.findById(vaccineId);
+
+      if (!vaccine) {
+        return res.status(404).json({ error: "Vacina não encontrada." });
+      }
+
       const newVaccines = [...user.vaccines];
 
       for (let i = 0; i < newVaccines.length; i++) {
