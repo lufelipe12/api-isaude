@@ -12,18 +12,29 @@ URL : https://api-isaude.herokuapp.com
 
 ### Requisições:
 
-- Registrar usuário: ###POST
+- Registrar usuário: POST
 
 
 		{
-		  "name":"luiz",
-		  "email":"lf@g.com",
-		  "gender":"masc",
-		  "dateOfBirth":"19/02/1995",
-		  "state":"MG",
-		  "city":"Araguari",
-		  "cpf":"0000100111",
-		  "password":"1234"
+		 	"name":"luiz",
+			 "email":"lf@g.com",
+			 "gender":"masc",
+			 "dateOfBirth":"19/02/1995",
+			 "state":"MG",
+			 "city":"Araguari",
+			 "cpf":"0000100111",
+			 "password":"1234"
 		}
+
+
+- Login de usuário: POST
+
+
+		{
+			"email":"lf@g.com",
+			"password":"1234"
+		}
+		
+
 
 
