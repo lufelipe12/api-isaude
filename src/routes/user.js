@@ -13,7 +13,11 @@ userRouter.post(
   (req, res) => UserControllers.createVaccineForUser(req, res)
 );
 
-userRouter.get("", (req, res) => UserControllers.getAllUsers(req, res));
+userRouter.get(
+  "",
+  (req, res, next) => isAuthenticated(req, res, next),
+  (req, res) => UserControllers.getAllUsers(req, res)
+);
 userRouter.get(
   "/:id/vaccines",
   (req, res, next) => isAuthenticated(req, res, next),
