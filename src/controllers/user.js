@@ -1,5 +1,6 @@
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
+import Vaccine from "../models/vaccines.js";
 
 class UserControllers {
   static async createUser(req, res) {
@@ -10,12 +11,12 @@ class UserControllers {
         createdAt,
         email,
         gender,
-        dob,
+        dateOfBirth,
         state,
         city,
         cpf,
         password,
-        // vaccines,
+        vaccines,
       } = req.body;
 
       const user = await User.create({
@@ -24,18 +25,18 @@ class UserControllers {
         createdAt,
         email,
         gender,
-        dob,
+        dateOfBirth,
         state,
         city,
         cpf,
         password,
-        // vaccines,
+        vaccines,
       });
 
-      res.status(201).json(user);
+      return res.status(201).json(user);
     } catch (error) {
       console.log(error);
-      res.status(500).json({ error: "Algo deu errado." });
+      return res.status(500).json({ error: "Algo deu errado." });
     }
   }
 
@@ -43,10 +44,10 @@ class UserControllers {
     try {
       const users = await User.find();
 
-      res.json({ users });
+      return res.json({ users });
     } catch (error) {
       console.log(error);
-      res.status(500).json({ error: "Algo deu errado." });
+      return res.status(500).json({ error: "Algo deu errado." });
     }
   }
 
@@ -56,11 +57,11 @@ class UserControllers {
 
       const user = await User.findById(id);
 
-      res.json({ user });
+      return res.json({ user });
     } catch (error) {
       console.log(error);
 
-      res.status(500).json({ error: "Algo deu errado." });
+      return res.status(500).json({ error: "Algo deu errado." });
     }
   }
 
@@ -72,14 +73,14 @@ class UserControllers {
       const userUpdated = await User.findByIdAndUpdate(id, {
         avatarUrl,
         password,
-        // vaccines,
+        vaccines,
         new: true,
       });
 
-      res.status(200).json(userUpdated);
+      return res.status(200).json(userUpdated);
     } catch (error) {
       console.log(error);
-      res.status(500).json({ error: "Algo deu errado." });
+      return res.status(500).json({ error: "Algo deu errado." });
     }
   }
 
@@ -89,10 +90,10 @@ class UserControllers {
 
       await User.findByIdAndRemove(id);
 
-      res.status(204).json({});
+      return res.status(204).json({});
     } catch (error) {
       console.log(error);
-      res.status(500).json({ error: "Algo deu errado." });
+      return res.status(500).json({ error: "Algo deu errado." });
     }
   }
 
@@ -120,10 +121,147 @@ class UserControllers {
         { expiresIn: "1d" }
       );
 
-      res.json({ token, user });
+      return res.json({ token, user });
     } catch (error) {
       console.log(error);
-      res.status(500).json({ error: "aconteceu algo de errado." });
+      return res.status(500).json({ error: "aconteceu algo de errado." });
+    }
+  }
+
+  static async createVaccineForUser(req, res) {
+    try {
+      const { id } = req.params;
+      const user = await User.findById(id);
+
+      const { name, manufacturer, batch, applicationDate, location, nextShot } =
+        req.body;
+
+      const vaccine = await Vaccine.create({
+        name,
+        manufacturer,
+        batch,
+        applicationDate,
+        location,
+        nextShot,
+      });
+
+      const userVaccines = user.vaccines;
+
+      const newVaccines = await User.findByIdAndUpdate(id, {
+        vaccines: [...userVaccines, vaccine],
+      });
+
+      return res.status(200).json(newVaccines);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "aconteceu algo de errado." });
+    }
+  }
+
+  static async getAllUsersVaccines(req, res) {
+    try {
+      const { id } = req.params;
+
+      const user = await User.findById(id);
+      const userVaccines = user.vaccines;
+
+      return res.json(userVaccines);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Algo deu errado." });
+    }
+  }
+
+  static async getOneVaccine(req, res) {
+    try {
+      const { userId, vaccineId } = req.params;
+
+      const user = await User.findById(userId);
+
+      if (!user) {
+        return res.status(404).json({ error: "Usuário não encontrado." });
+      }
+
+      const vaccine = await Vaccine.findById(vaccineId);
+
+      if (!vaccine) {
+        return res.status(404).json({ error: "Vacina não encontrado." });
+      }
+
+      return res.json(vaccine);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Algo deu errado." });
+    }
+  }
+
+  static async updateOneVaccine(req, res) {
+    try {
+      const { userId, vaccineId } = req.params;
+
+      const { name, manufacturer, batch, applicationDate, location, nextShot } =
+        req.body;
+
+      const user = await User.findById(userId);
+
+      if (!user) {
+        return res.status(404).json({ error: "Usuário não encontrado." });
+      }
+
+      const newVaccines = [...user.vaccines];
+
+      for (let i = 0; i < newVaccines.length; i++) {
+        if (newVaccines[i]._id.toString() === vaccineId) {
+          newVaccines[i].name = name === null ? name : newVaccines[i].name;
+          newVaccines[i].manufacturer =
+            manufacturer === null ? manufacturer : newVaccines[i].manufacturer;
+          newVaccines[i].batch = batch === null ? batch : newVaccines[i].batch;
+          newVaccines[i].applicationDate =
+            applicationDate === null
+              ? applicationDate
+              : newVaccines[i].applicationDate;
+          newVaccines[i].location =
+            location === null ? location : newVaccines[i].location;
+          newVaccines[i].nextShot =
+            nextShot === null ? nextShot : newVaccines[i].nextShot;
+        }
+      }
+
+      const userUpdated = await User.findByIdAndUpdate(userId, {
+        vaccines: [...newVaccines],
+      });
+
+      return res.json(userUpdated);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Algo deu errado." });
+    }
+  }
+
+  static async deleteVaccine(req, res) {
+    try {
+      const { userId, vaccineId } = req.params;
+
+      const user = await User.findById(userId);
+
+      console.log(user.vaccines);
+
+      if (!user) {
+        return res.status(404).json({ error: "Usuário não encontrado." });
+      }
+
+      const newVaccinesList = user.vaccines.filter(
+        (vaccine) => vaccine._id.toString() !== vaccineId
+      );
+
+      await User.findByIdAndUpdate(userId, {
+        vaccines: [...newVaccinesList],
+      });
+
+      return res.status(204).json({});
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Algo deu errado." });
     }
   }
 }

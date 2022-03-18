@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  dob: {
+  dateOfBirth: {
     type: String,
     required: true,
   },
@@ -45,10 +45,10 @@ const UserSchema = new mongoose.Schema({
     required: true,
     select: false,
   },
-  // vaccines: {
-  //   type: Array,
-  //   required: true,
-  // },
+  vaccines: {
+    type: Array,
+    required: true,
+  },
 });
 
 const User = mongoose.model("User", UserSchema);
