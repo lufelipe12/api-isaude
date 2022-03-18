@@ -93,6 +93,8 @@ URL : https://api-isaude.herokuapp.com
 			"error":"Algo deu errado."
 		}
 		
+		
+## Rotas em que é necessária autenticação.
 
 ### Rota /user/:id/vaccines: 
 
