@@ -15,7 +15,7 @@ URL : https://api-isaude.herokuapp.com
 - Registrar usuário: ###POST
 
 
-{
+	{
 	"name":"luiz",
 	"email":"lf@g.com",
 	"gender":"masc",
@@ -24,6 +24,6 @@ URL : https://api-isaude.herokuapp.com
 	"city":"Araguari",
 	"cpf":"0000100111",
 	"password":"1234"
-}
+	}
 
 
