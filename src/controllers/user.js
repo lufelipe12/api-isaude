@@ -212,23 +212,27 @@ class UserControllers {
 
       for (let i = 0; i < newVaccines.length; i++) {
         if (newVaccines[i]._id.toString() === vaccineId) {
-          newVaccines[i].name = name === null ? name : newVaccines[i].name;
+          newVaccines[i].name = name !== undefined ? name : newVaccines[i].name;
           newVaccines[i].manufacturer =
-            manufacturer === null ? manufacturer : newVaccines[i].manufacturer;
-          newVaccines[i].batch = batch === null ? batch : newVaccines[i].batch;
+            manufacturer !== undefined
+              ? manufacturer
+              : newVaccines[i].manufacturer;
+          newVaccines[i].batch =
+            batch !== undefined ? batch : newVaccines[i].batch;
           newVaccines[i].applicationDate =
-            applicationDate === null
+            applicationDate !== undefined
               ? applicationDate
               : newVaccines[i].applicationDate;
           newVaccines[i].location =
-            location === null ? location : newVaccines[i].location;
+            location !== undefined ? location : newVaccines[i].location;
           newVaccines[i].nextShot =
-            nextShot === null ? nextShot : newVaccines[i].nextShot;
+            nextShot !== undefined ? nextShot : newVaccines[i].nextShot;
         }
       }
 
       const userUpdated = await User.findByIdAndUpdate(userId, {
         vaccines: [...newVaccines],
+        new: true,
       });
 
       return res.json(userUpdated);
