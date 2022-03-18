@@ -65,7 +65,7 @@ URL : https://api-isaude.herokuapp.com
 		}
 		
 
-- Resposta: Status 201:
+- Resposta: Status 200:
 
 		{
 
