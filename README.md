@@ -14,6 +14,7 @@ URL : https://api-isaude.herokuapp.com
 
 - Registrar usuário: ###POST
 
+
 {
 	"name":"luiz",
 	"email":"lf@g.com",
