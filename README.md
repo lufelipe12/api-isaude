@@ -1,7 +1,7 @@
 # API-iSaude
 
 API desenvolvida com Node, Express e MongoDB com a finalidade de ser utilizada para a aplicação iSaúde.
-URL : https://api-isaude.herokuapp.com
+Base-URL : https://api-isaude.herokuapp.com
 
 ## ENDPOINTS:
 
