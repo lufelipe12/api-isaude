@@ -16,7 +16,7 @@ URL : https://api-isaude.herokuapp.com
 
 - Registrar usuário: POST
 
-
+		```json
 		{
 		 	"name":"luiz",
 			 "email":"lf@g.com",
@@ -27,7 +27,7 @@ URL : https://api-isaude.herokuapp.com
 			 "cpf":"0000100111",
 			 "password":"1234"
 		}
-		
+		```
 		
 - Resposta: Status 201:
 
