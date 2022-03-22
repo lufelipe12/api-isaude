@@ -48,10 +48,10 @@ URL : https://api-isaude.herokuapp.com
 			"__v": 0
 		}
 		
-- Resposta: Status 500: 
+- Resposta: Status 400: 
 
 		{
-			"error":"Algo deu errado."
+			"error":"CPF ou e-mail já cadastrados."
 		}
 		
 ### Rota /login: 
@@ -87,10 +87,17 @@ URL : https://api-isaude.herokuapp.com
 			}
 		}
 		
-- Resposta: Status 500: 
+- Resposta: Status 400: 
 
 		{
-			"error":"Algo deu errado."
+			"error":"Usuário não existe."
+		}
+		
+
+- Resposta: Status 400: 
+
+		{
+			"error":"Senha incorreta."
 		}
 		
 		
@@ -125,10 +132,43 @@ URL : https://api-isaude.herokuapp.com
 			"__v": 0
 		}
 		
-- Resposta: Status 500: 
+- Resposta: Status 400: 
 
 		{
-			"error":"Algo deu errado."
+			"error":"Usuário não encontrado."
+		}
+		
+- Buscar vacinas de um usuário: GET
+		
+- Resposta: Status 200:
+
+		[
+			{
+				"name": "Tétano",
+				"manufacturer": "UFU",
+				"batch": "444222",
+				"applicationDate": "19/08/2020",
+				"location": "Guaratinguetá",
+				"nextShot": "Esquema completo",
+				"_id": "62385b999f1386618e6fda27",
+				"__v": 0
+			},
+			{
+				"name": "Covid-19",
+				"manufacturer": "Pfizer",
+				"batch": "123123",
+				"applicationDate": "20/12/2020",
+				"location": "Araguari",
+				"nextShot": "Esquema completo",
+				"_id": "62385bb99f1386618e6fda2b",
+				"__v": 0
+			}
+		]
+		
+- Resposta: Status 400: 
+
+		{
+			"error":"Usuário não encontrado."
 		}
 		
 
@@ -168,10 +208,16 @@ URL : https://api-isaude.herokuapp.com
 			"__v": 0
 		}
 		
-- Resposta: Status 500: 
+- Resposta: Status 404: 
 
 		{
-			"error":"Algo deu errado."
+			"error":"Usuário não encontrado."
+		}
+		
+- Resposta: Status 404: 
+
+		{
+			"error":"Vacina não encontrada."
 		}
 
 - Deletar vacina: DELETE
@@ -184,9 +230,15 @@ URL : https://api-isaude.herokuapp.com
 			Não há corpo de requisição.
 
 
-- Resposta: Status 500: 
+- Resposta: Status 404: 
 
 		{
-			"error":"Algo deu errado."
+			"error":"Usuário não encontrado."
+		}
+		
+- Resposta: Status 404: 
+
+		{
+			"error":"Vacina não encontrada."
 		}
 
