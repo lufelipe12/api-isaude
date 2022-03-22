@@ -31,7 +31,7 @@ URL : https://api-isaude.herokuapp.com
 		
 - Resposta: Status 201:
 
-
+```json
 		{
 			"name": "luiz",
 			"avatarUrl": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
@@ -47,25 +47,26 @@ URL : https://api-isaude.herokuapp.com
 			"_id": "6234d0c9feeaf6018e84ecd7",
 			"__v": 0
 		}
-		
-- Resposta: Status 400: 
+```
 
+- Resposta: Status 400: 
+```json
 		{
 			"error":"CPF ou e-mail já cadastrados."
 		}
-		
+```
 ### Rota /login: 
 
 - Login de usuário: POST
-
+```json
 		{
 			"email":"lf@g.com",
 			"password":"1234"
 		}
-		
+```		
 
 - Resposta: Status 200:
-
+```json
 		{
 
 			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzRkMGM5ZmVlYWY2MDE4ZTg0ZWNkNyIsImlhdCI6MTY0Nz
@@ -86,27 +87,27 @@ URL : https://api-isaude.herokuapp.com
 				"__v": 0
 			}
 		}
-		
+```		
 - Resposta: Status 400: 
-
+```json
 		{
 			"error":"Usuário não existe."
 		}
-		
+```		
 
 - Resposta: Status 400: 
-
+```json
 		{
 			"error":"Senha incorreta."
 		}
-		
+```		
 		
 ## Rotas em que é necessária autenticação.
 
 ### Rota /user/:id/vaccines: 
 
 - Criação de vacina: POST
-		
+```json		
 		{
 			"name":"Tétano",
 			"manufacturer": "UFU",
@@ -114,9 +115,9 @@ URL : https://api-isaude.herokuapp.com
 			"applicationDate":"19/08/2020",
 			"location":"Guaratinguetá"
 		}
-		
+```		
 - Resposta: Status 200:
-
+```json
 		{
 			"_id": "6234d0c9feeaf6018e84ecd7",
 			"name": "luiz",
@@ -131,17 +132,17 @@ URL : https://api-isaude.herokuapp.com
 			"vaccines": [],
 			"__v": 0
 		}
-		
+```		
 - Resposta: Status 400: 
-
+```json
 		{
 			"error":"Usuário não encontrado."
 		}
-		
+```		
 - Buscar vacinas de um usuário: GET
 		
 - Resposta: Status 200:
-
+```json
 		[
 			{
 				"name": "Tétano",
@@ -164,24 +165,24 @@ URL : https://api-isaude.herokuapp.com
 				"__v": 0
 			}
 		]
-		
+```		
 - Resposta: Status 400: 
-
+```json
 		{
 			"error":"Usuário não encontrado."
 		}
-		
+```		
 
 ### Rota /user/:id/vaccines/:vaccineId:
 
 - Edição de vacina: PATCH --- Todos campos são alteráveis
-		
+```json		
 		{
 			"manufacturer": "UFU",
 		}
-		
+```		
 - Resposta: Status 200:
-
+```json
 		{
 			"_id": "6234d0c9feeaf6018e84ecd7",
 			"name": "luiz",
@@ -207,19 +208,19 @@ URL : https://api-isaude.herokuapp.com
 			],
 			"__v": 0
 		}
-		
+```	
 - Resposta: Status 404: 
-
+```json
 		{
 			"error":"Usuário não encontrado."
 		}
-		
+```		
 - Resposta: Status 404: 
-
+```json
 		{
 			"error":"Vacina não encontrada."
 		}
-
+```
 - Deletar vacina: DELETE
 
 /user/:id/vaccines/:vaccineId:
@@ -231,14 +232,14 @@ URL : https://api-isaude.herokuapp.com
 
 
 - Resposta: Status 404: 
-
+```json
 		{
 			"error":"Usuário não encontrado."
 		}
-		
+```		
 - Resposta: Status 404: 
-
+```json
 		{
 			"error":"Vacina não encontrada."
 		}
-
+```
